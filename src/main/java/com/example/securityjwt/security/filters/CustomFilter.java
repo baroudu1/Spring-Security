@@ -57,10 +57,12 @@ public class CustomFilter extends OncePerRequestFilter {
             } else {
                 logger.error("JWT is not valid");
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+                return;
             }
         }catch (Exception e){
             logger.error("JWT Exception: {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+            return;
         }
         filterChain.doFilter(request, response);
     }
