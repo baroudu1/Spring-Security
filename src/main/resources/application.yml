@@ -1,0 +1,5 @@
+project:
+  Auth:
+    JWT:
+      SecretKey : "Mr.Boo"
+      Expiration : 3600000
