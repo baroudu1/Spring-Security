@@ -63,14 +63,21 @@ public class JWTHelper {
 
     public boolean validateJwtToken(String authToken) {
         try {
+
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(authToken);
             return true;
+        } catch (SignatureException e) {
+            logger.error("Invalid JWT signature: {}", e.getMessage());
+        } catch (MalformedJwtException e) {
+            logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
+            logger.error("Expired JWT token: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            logger.error("Unsupported JWT token: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
-        }catch (Exception e) {
-            logger.error("We've found an error while parsing JWT token: {}", e.getMessage());
+        } catch (Exception e) {
+            logger.error("JWT token is not valid: {}", e.getMessage());
         }
         return false;
     }
