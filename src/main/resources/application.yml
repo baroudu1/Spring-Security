@@ -1,5 +1,5 @@
 project:
   Auth:
     JWT:
-      SecretKey : "MySecret@2023"
+      SecretKey : "MySecret@2022"
       Expiration : 3600000
